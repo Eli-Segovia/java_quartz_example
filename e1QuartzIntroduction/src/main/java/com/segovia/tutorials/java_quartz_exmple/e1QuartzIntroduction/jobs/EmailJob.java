@@ -36,6 +36,20 @@ public class EmailJob extends QuartzJobBean {
         String body = jobDataMap.getString("body");
         String recipientEmail = jobDataMap.getString("email");
 
+        System.out.printf(
+                        "==============================\n" +
+                        "        Email Preview\n" +
+                        "==============================\n" +
+                        "To      : %s\n" +
+                        "Subject : %s\n" +
+                        "--------------------------------\n" +
+                        "%s\n" +
+                        "==============================\n",
+                recipientEmail,
+                subject,
+                body
+        );
+
         sendMail(mailProperties.getUsername(), recipientEmail, subject, body);
     }
 
@@ -51,6 +65,8 @@ public class EmailJob extends QuartzJobBean {
             messageHelper.setText(body, true);
             messageHelper.setFrom(fromEmail);
             messageHelper.setTo(toEmail);
+
+            mailSender.send(message);
 
         } catch(MessagingException messagingException) {
             System.out.println(messagingException);
