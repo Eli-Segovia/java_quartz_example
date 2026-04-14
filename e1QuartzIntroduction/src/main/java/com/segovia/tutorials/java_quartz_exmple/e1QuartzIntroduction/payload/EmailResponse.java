@@ -1,5 +1,12 @@
 package com.segovia.tutorials.java_quartz_exmple.e1QuartzIntroduction.payload;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Getter;
+import lombok.Setter;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@Setter
+@Getter
 public class EmailResponse {
 
     private boolean success;
